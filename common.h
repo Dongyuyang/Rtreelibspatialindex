@@ -6,6 +6,7 @@
 #include <limits>
 #include <SpatialIndex.h>
 #include "visitor.h"
+#include "catch.h"
 
 using namespace SpatialIndex;
 using namespace std;
@@ -346,11 +347,13 @@ uint32_t brute_NN(const Point &q, const vector<Point> &P)
 uint32_t brute_range(const Point &q, const vector<Point> &P, double r)
 {
 
+	int count = 0;
     for(size_t i = 0; i < P.size(); i++){
         double dist = P[i].getMinimumDistance(q);
+		count++;
         if(dist <= r){
-            return 1;
+			return count;
         }
     }
-    return 0;
+	return count;
 }
